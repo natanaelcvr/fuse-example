@@ -1,0 +1,42 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+# disable all management enpoints except health
+endpoints:
+  enabled: false
+  health:
+    enabled: true
+
+management:
+  health:
+    defaults:
+      enabled: false
+
+camel:
+  health:
+    enabled: false
+    indicator:
+      enabled: true
+  component:
+    kafka:
+      client-id: ${KAFKA_CLIENT_ID:client-01}
+      group-id: ${KAFKA_GROUP_ID:default-group}
+      key: ${KAFKA_KEY:fuse}
+      brokers: ${KAFKA_BROKER_LIST:localhost:9093}
+      topic:
+        producer: ${KAFKA_PRODUCER_TOPIC:smoke-test}
+        consumer: ${KAFKA_CONSUMER_TOPIC:smoke-test} 
+      configuration:
+        security-protocol: SSL
+        ssl-keystore-password: r3dh4t1!
+        ssl-keystore-location: client.keystore.jks
+        ssl-key-password: r3dh4t1!
+        ssl-truststore-location: kafka.truststore.jks
+        ssl-truststore-password: r3dh4t1!
+
+vars:
+  loop-count: ${LOOP_COUNT:10}
+    
+    
+    
+
